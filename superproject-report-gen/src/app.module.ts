@@ -10,6 +10,9 @@ import { Superproject } from './database/entities/superproject.entity';
 import { Section } from './database/entities/section.entity';
 import { Defect } from './database/entities/defect.entity';
 import { Project } from './database/entities/project.entity';
+import { ReportgenModule } from './reportgen/reportgen.module';
+import { DatafetchModule } from './datafetch/datafetch.module';
+import { DatafetchModule } from './datafetch/datafetch.module';
 
 @Module({
   imports: [
@@ -38,6 +41,8 @@ import { Project } from './database/entities/project.entity';
       }),
       inject: [ConfigService],
     }),
+        ReportgenModule,
+        DatafetchModule,
   ],
   controllers: [AppController],
   providers: [AppService],

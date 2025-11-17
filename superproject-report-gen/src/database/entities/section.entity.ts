@@ -11,7 +11,6 @@ import {
 } from 'typeorm';
 import { Project } from './project.entity';
 import { Superproject } from './superproject.entity';
-import { SectionalParameter } from './sectional-parameter.entity';
 import { Defect } from './defect.entity';
 import { Point } from 'geojson';
 
@@ -157,12 +156,6 @@ export class Section {
   })
   @JoinColumn({ name: 'sproid' })
   superproject: Superproject;
-
-  @OneToOne(
-    () => SectionalParameter,
-    (sectionalParameter) => sectionalParameter.section,
-  )
-  sectionalParameters: SectionalParameter;
 
   @OneToMany(() => Defect, (defect) => defect.section)
   defects: Defect[];
