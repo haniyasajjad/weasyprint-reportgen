@@ -7,6 +7,7 @@ import { Superproject } from '../database/entities/superproject.entity';
 import { Project } from '../database/entities/project.entity';
 import { Section } from '../database/entities/section.entity';
 import { Defect } from '../database/entities/defect.entity';
+import { Supersection } from '../database/entities/supersection.entity';
 
 // Ensure these exist in your .env file or hardcode them temporarily
 const myDataSource = new DataSource({
@@ -16,9 +17,9 @@ const myDataSource = new DataSource({
   username: process.env.DB_USERNAME || 'postgres',
   password: process.env.DB_PASSWORD || 'pgAdmin',
   database: process.env.DB_NAME || 'SyncAuth2', // Update this!
-  synchronize: false, 
+  synchronize: false,
   logging: false,
-  entities: [Superproject, Project, Section, Defect],
+  entities: [Superproject, Project, Section, Defect, Supersection],
 });
 
 async function seedDatabase() {
@@ -36,7 +37,7 @@ async function seedDatabase() {
     const { superprojects, projects, sections, defects } = generateData();
 
     // --- SAVE DATA ---
-    
+
     // 1. Superproject
     console.log('Saving superproject...');
     await superprojectRepo.save(superprojects);

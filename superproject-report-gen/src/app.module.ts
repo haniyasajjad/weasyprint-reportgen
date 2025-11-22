@@ -4,7 +4,6 @@ import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-
 import { Supersection } from './database/entities/supersection.entity';
 import { Superproject } from './database/entities/superproject.entity';
 import { Section } from './database/entities/section.entity';
@@ -12,37 +11,28 @@ import { Defect } from './database/entities/defect.entity';
 import { Project } from './database/entities/project.entity';
 import { ReportgenModule } from './reportgen/reportgen.module';
 import { DatafetchModule } from './datafetch/datafetch.module';
-import { DatafetchModule } from './datafetch/datafetch.module';
 
 @Module({
   imports: [
-        TypeOrmModule.forRootAsync({
+    TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
         type: 'postgres',
-        host: configService.get<string>('DB_HOST'),
-        port: configService.get<number>('DB_PORT') || 5432,
-        username: configService.get<string>('DB_USERNAME'),
-        password: configService.get<string>('DB_PASSWORD'),
-        database: configService.get<string>('DB_NAME'),
+        host: process.env.DB_HOST || 'localhost',
+        port: parseInt(process.env.DB_PORT || '5432', 10),
+        username: process.env.DB_USER || 'postgres', // match your .env
+        password: process.env.DB_PASSWORD || '',
+        database: process.env.DB_NAME || 'gps_data_db',
         synchronize: false,
         logging: false,
-        // logging: ['query', 'error'],
-        // Explicitly list all entities here for clarity and reliability
-        entities: [
-          Supersection,
-          Superproject,
-          Section,
-          Defect,
-          Project,
-        ],
-        // You can keep autoLoadEntities: true; it won't hurt, but the explicit list is definitive
+        entities: [Supersection, Superproject, Section, Defect, Project],
         autoLoadEntities: true,
       }),
       inject: [ConfigService],
     }),
-        ReportgenModule,
-        DatafetchModule,
+
+    ReportgenModule,
+    DatafetchModule,
   ],
   controllers: [AppController],
   providers: [AppService],

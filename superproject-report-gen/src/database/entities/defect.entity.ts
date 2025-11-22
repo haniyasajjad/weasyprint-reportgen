@@ -1,11 +1,17 @@
-import { Entity, Column, ManyToOne, JoinColumn, PrimaryColumn, Unique } from 'typeorm';
+import {
+  Entity,
+  Column,
+  ManyToOne,
+  JoinColumn,
+  PrimaryColumn,
+  Unique,
+} from 'typeorm';
 import { Section } from './section.entity';
 import { Superproject } from './superproject.entity';
 import { Point } from 'geojson';
 
 @Entity('defects')
 @Unique(['sectionId', 'firestoreDefectId'])
-
 export class Defect {
   @Column({
     type: 'text',
@@ -66,7 +72,11 @@ export class Defect {
   @Column({ type: 'double precision', name: 'profile', nullable: true })
   profile: number;
 
-  @Column({ type: 'double precision', name: 'longitudinal_span', nullable: true })
+  @Column({
+    type: 'double precision',
+    name: 'longitudinal_span',
+    nullable: true,
+  })
   longitudinalSpan: number;
 
   @Column({ type: 'integer', name: 'transverse_position', nullable: true })

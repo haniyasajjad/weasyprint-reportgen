@@ -26,7 +26,7 @@ function createFakeUtmData() {
   return {
     tly: [faker.number.float(), faker.number.float()],
     scaleFactor: faker.number.float(),
-    tlxPixel: faker.number.int({ min: 0, max: 10000 }), 
+    tlxPixel: faker.number.int({ min: 0, max: 10000 }),
     zoneNumber: faker.number.int({ min: 1, max: 60 }),
     bryPixel: faker.number.int({ min: 0, max: 10000 }),
     zone: `${faker.number.int({ min: 1, max: 60 })}${faker.helpers.arrayElement(['N', 'S'])}`,
@@ -54,8 +54,8 @@ export function generateData() {
   const creatorEmployeeid = `EID_${faker.string.uuid()}`;
 
   // --- Step 1: Create 1 Superproject ---
-  const pTitle = faker.lorem.words(3); 
-  
+  const pTitle = faker.lorem.words(3);
+
   const superproject = {
     sproid: sproid,
     proidList: [] as string[],
@@ -89,10 +89,10 @@ export function generateData() {
       sproid: superproject.sproid,
       groupVideosInfo: [
         { groupId: 1, videoPath: faker.internet.url() },
-        { groupId: 2, videoPath: faker.internet.url() }
+        { groupId: 2, videoPath: faker.internet.url() },
       ],
       // FIXED: Constrained to safe integer
-      association: faker.number.int({ min: 1, max: 100000 }), 
+      association: faker.number.int({ min: 1, max: 100000 }),
       projectType: faker.helpers.arrayElement([1, 2, 3]),
       dateCreated: faker.date.recent(),
       showFreshIntroMob: faker.datatype.boolean(),
@@ -125,7 +125,10 @@ export function generateData() {
       segregatedCyclepath: faker.datatype.boolean(),
       accessMap: superproject.accessMap,
       archived: false,
-      conditionIndex: [faker.number.float({ min: 0, max: 100 }), faker.number.float({ min: 0, max: 100 })],
+      conditionIndex: [
+        faker.number.float({ min: 0, max: 100 }),
+        faker.number.float({ min: 0, max: 100 }),
+      ],
       videosCount: 2,
       videoMessage: faker.lorem.sentence(),
       isVideoUploadingOnDB: false,
@@ -144,7 +147,10 @@ export function generateData() {
       videoSelectionPath: {},
       baseCreditAmountRequired: faker.number.float({ min: 10, max: 100 }),
       calculatingPrice: false,
-      realCost: { amount: faker.number.float({ min: 10, max: 100 }), currency: 'USD' },
+      realCost: {
+        amount: faker.number.float({ min: 10, max: 100 }),
+        currency: 'USD',
+      },
       totalProcessingDistance: faker.number.float({ min: 1000, max: 10000 }),
       approxCreditsRequired: faker.number.float({ min: 10, max: 100 }),
       isVideoSelectionDone: true,
@@ -202,10 +208,10 @@ export function generateData() {
         depthMapPathHR: faker.system.filePath(),
         groupId: 1,
         lrHeight: 480,
-        endIndex: (j * 100) + 99,
+        endIndex: j * 100 + 99,
         maskPath: faker.system.filePath(),
         groupInitIndex: j * 100,
-        groupEndIndex: (j * 100) + 99,
+        groupEndIndex: j * 100 + 99,
         utmData: createFakeUtmData(),
         stitchPath: faker.system.filePath(),
         hrHeight: 1080,
@@ -214,7 +220,11 @@ export function generateData() {
         rci: faker.number.float({ min: 0, max: 10 }),
         startingGps: createFakeGpsPoint(),
         endingGps: createFakeGpsPoint(),
-        gps: { lat: faker.location.latitude(), lng: faker.location.longitude(), time: faker.date.past().getTime() },
+        gps: {
+          lat: faker.location.latitude(),
+          lng: faker.location.longitude(),
+          time: faker.date.past().getTime(),
+        },
         frame: j,
         distance: faker.number.float({ min: 1, max: 10000 }),
         pci: faker.number.float({ min: 0, max: 100 }),
@@ -266,7 +276,12 @@ export function generateData() {
           thickness: faker.number.float(),
           assignNetworkMap: {},
           gpsCorner: faker.location.direction(),
-          gpsBbox: [faker.location.longitude(), faker.location.latitude(), faker.location.longitude(), faker.location.latitude()],
+          gpsBbox: [
+            faker.location.longitude(),
+            faker.location.latitude(),
+            faker.location.longitude(),
+            faker.location.latitude(),
+          ],
           isComplete: true,
           region: faker.number.int({ min: 1, max: 5 }),
         };
@@ -275,7 +290,10 @@ export function generateData() {
     }
   }
 
-  superproject.videosCount = projects.reduce((acc, p) => acc + p.videosCount, 0);
+  superproject.videosCount = projects.reduce(
+    (acc, p) => acc + p.videosCount,
+    0,
+  );
   superprojects.push(superproject);
 
   console.log('--- Generation Complete ---');

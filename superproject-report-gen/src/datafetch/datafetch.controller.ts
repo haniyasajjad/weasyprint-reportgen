@@ -1,34 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { DatafetchService } from './datafetch.service';
-import { CreateDatafetchDto } from './dto/create-datafetch.dto';
-import { UpdateDatafetchDto } from './dto/update-datafetch.dto';
 
 @Controller('datafetch')
 export class DatafetchController {
   constructor(private readonly datafetchService: DatafetchService) {}
 
-  @Post()
-  create(@Body() createDatafetchDto: CreateDatafetchDto) {
-    return this.datafetchService.create(createDatafetchDto);
+  // Fetch full report
+  @Get('report/:sproid')
+  getReport(@Param('sproid') sproid: string) {
+    return this.datafetchService.getSuperprojectReportData(sproid);
   }
 
-  @Get()
-  findAll() {
-    return this.datafetchService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.datafetchService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDatafetchDto: UpdateDatafetchDto) {
-    return this.datafetchService.update(+id, updateDatafetchDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.datafetchService.remove(+id);
+  // Fetch statistics only
+  @Get('stats/:sproid')
+  getStats(@Param('sproid') sproid: string) {
+    return this.datafetchService.getSuperprojectStatistics(sproid);
   }
 }

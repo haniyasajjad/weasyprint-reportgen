@@ -382,7 +382,7 @@ export class Project {
 
   @ManyToOne(() => Superproject, (superproject) => superproject.sections, {
     onDelete: 'CASCADE',
-    nullable: true, 
+    nullable: true,
   })
   @JoinColumn({ name: 'sproid' })
   superproject: Superproject;

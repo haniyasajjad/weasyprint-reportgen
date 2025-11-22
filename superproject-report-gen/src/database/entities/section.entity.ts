@@ -124,10 +124,10 @@ export class Section {
   @Column({ type: 'double precision', default: 0, nullable: true })
   distance: number;
 
-  @Column({ type: 'double precision' , nullable: true})
+  @Column({ type: 'double precision', nullable: true })
   pci: number;
 
-  @Column({ type: 'double precision', default: -1, nullable: true})
+  @Column({ type: 'double precision', default: -1, nullable: true })
   cci: number;
 
   @Column({ type: 'integer', name: 'stitch_frame_number', nullable: true })

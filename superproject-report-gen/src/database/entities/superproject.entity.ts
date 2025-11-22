@@ -1,5 +1,12 @@
-import { Entity, PrimaryColumn, Column, CreateDateColumn, OneToMany } from 'typeorm';
+import {
+  Entity,
+  PrimaryColumn,
+  Column,
+  CreateDateColumn,
+  OneToMany,
+} from 'typeorm';
 import { Section } from './section.entity';
+import { Supersection } from './supersection.entity';
 
 @Entity('superprojects')
 export class Superproject {
@@ -57,8 +64,9 @@ export class Superproject {
   @Column({ type: 'integer', nullable: true, name: 'status' })
   status: number;
 
-
-
-  @OneToMany(() => Section, section => section.superproject)
+  @OneToMany(() => Section, (section) => section.superproject)
   sections: Section[];
+
+  @OneToMany(() => Supersection, (supersection) => supersection.superproject)
+  supersections: Supersection[];
 }
